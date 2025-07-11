@@ -4,22 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultsDiv = document.getElementById("results");
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Prevent page reload on submit
-
-    const query = searchInput.value.trim();
-    if (!query) return;
+    e.preventDefault(); // prevent page reload
 
     resultsDiv.textContent = "Loading...";
 
-    const requestBody = {
+    const rawBody = JSON.stringify({
       areaTypeCode: "N",
       areaCode: "0000000",
       industryCode: "000000",
-      occupationCode: [query],
-      datatype: [query],
+      occupationCode: ["xxxxxx"],
+      datatype: ["xxxxxx"],
       releaseDateCode: ["2024A01", "2024A01"],
       outputType: "H"
-    };
+    });
 
     try {
       const response = await fetch("https://data.bls.gov/OESServices/resultsindocc", {
@@ -28,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify(requestBody)
+        body: rawBody
       });
 
       if (!response.ok) {
