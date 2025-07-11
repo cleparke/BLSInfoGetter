@@ -22,5 +22,5 @@ document.addEventListener("DOMContentLoaded", () => {
     resultsDiv.innerHTML = filtered
       .map(item => `<div><strong>${item.title}</strong> — ${item.code}</div>`)
       .join("");
-  });
+  }); 
 });
