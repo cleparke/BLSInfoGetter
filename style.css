@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 2rem;
+}
+
+#search {
+  padding: 0.5rem;
+  width: 300px;
+  font-size: 1rem;
+}
+
+#results {
+  margin-top: 1rem;
+}
