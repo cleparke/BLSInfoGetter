@@ -1,28 +1,42 @@
-async function search() {
+let allData = [];
+
+// Load the JSON once when the page loads
+window.addEventListener("DOMContentLoaded", async () => {
+  const response = await fetch("data.json");
+  allData = await response.json();
+
+  // Attach live search behavior
+  document.getElementById("searchBox").addEventListener("input", updateResults);
+  document.getElementById("statForm").addEventListener("change", updateResults);
+});
+
+function updateResults() {
   const query = document.getElementById("searchBox").value.toLowerCase();
   const resultDiv = document.getElementById("result");
 
-  // Load JSON data
-  const response = await fetch("data.json");
-  const data = await response.json();
-
-  // Get selected fields from checkboxes
   const checkedStats = Array.from(document.querySelectorAll('input[name="stat"]:checked'))
     .map(cb => cb.value);
 
-  // Search for the first match
-  const match = data.find(item =>
+  // Filter matching occupations
+  const matches = allData.filter(item =>
     item.Occupations.toLowerCase().includes(query)
   );
 
-  if (match) {
-    let html = `<h2>${match.Occupations}</h2><ul>`;
-    checkedStats.forEach(stat => {
-      html += `<li><strong>${stat}:</strong> ${match[stat] ?? "N/A"}</li>`;
-    });
-    html += `</ul>`;
-    resultDiv.innerHTML = html;
+  // Build results HTML
+  if (matches.length > 0) {
+    resultDiv.innerHTML = matches.map(match => {
+      let statList = checkedStats.map(stat =>
+        `<li><strong>${stat}:</strong> ${match[stat] ?? "N/A"}</li>`
+      ).join("");
+
+      return `
+        <div class="result">
+          <h2>${match.Occupations}</h2>
+          <ul>${statList}</ul>
+        </div>
+      `;
+    }).join("");
   } else {
-    resultDiv.innerHTML = `<p>No match found.</p>`;
+    resultDiv.innerHTML = `<p>No matches found.</p>`;
   }
 }
