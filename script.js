@@ -2,7 +2,7 @@ let allData = [];
 
 // Load the JSON once when the page loads
 window.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("data.json");
+  const response = await fetch("BLS2024.json");
   allData = await response.json();
 
   // Attach live search behavior
