@@ -1,43 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("search-form");
-  const searchInput = document.getElementById("search");
-  const resultsDiv = document.getElementById("results");
+async function search() {
+  const query = document.getElementById("searchBox").value.toLowerCase();
+  const resultDiv = document.getElementById("result");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // prevent page reload
+  // Load JSON data
+  const response = await fetch("data.json");
+  const data = await response.json();
 
-    resultsDiv.textContent = "Loading...";
+  // Get selected fields from checkboxes
+  const checkedStats = Array.from(document.querySelectorAll('input[name="stat"]:checked'))
+    .map(cb => cb.value);
 
-    const rawBody = JSON.stringify({
-      areaTypeCode: "N",
-      areaCode: "0000000",
-      industryCode: "000000",
-      occupationCode: ["xxxxxx"],
-      datatype: ["xxxxxx"],
-      releaseDateCode: ["2024A01", "2024A01"],
-      outputType: "H"
+  // Search for the first match
+  const match = data.find(item =>
+    item.Occupations.toLowerCase().includes(query)
+  );
+
+  if (match) {
+    let html = `<h2>${match.Occupations}</h2><ul>`;
+    checkedStats.forEach(stat => {
+      html += `<li><strong>${stat}:</strong> ${match[stat] ?? "N/A"}</li>`;
     });
-
-    try {
-      const response = await fetch("https://data.bls.gov/OESServices/resultsindocc", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: rawBody
-      });
-
-      if (!response.ok) {
-        resultsDiv.textContent = `Error: ${response.status} ${response.statusText}`;
-        return;
-      }
-
-      const data = await response.json();
-      resultsDiv.textContent = JSON.stringify(data, null, 2);
-
-    } catch (error) {
-      resultsDiv.textContent = `Fetch failed: ${error.message}`;
-    }
-  });
-});
+    html += `</ul>`;
+    resultDiv.innerHTML = html;
+  } else {
+    resultDiv.innerHTML = `<p>No match found.</p>`;
+  }
+}
