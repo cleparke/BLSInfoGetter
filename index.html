@@ -2,14 +2,18 @@
 <html>
 <head>
   <title>Occupation Search</title>
-  <title>BLS Explorer</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .result { margin-bottom: 20px; }
+    .result h2 { margin-bottom: 5px; }
+    .result ul { margin: 0; padding-left: 20px; }
+  </style>
 </head>
 <body>
-  <h1>Search Occupation</h1>
-  <input type="text" id="searchBox" placeholder="Enter occupation name" />
-  <button onclick="search()">Search</button>
+  <h1>Search Occupations</h1>
+
+  <input type="text" id="searchBox" placeholder="Type to search..." />
+  
   <h3>Select stats to show:</h3>
   <form id="statForm">
     <label><input type="checkbox" name="stat" value="Employment" checked> Employment</label><br>
@@ -28,7 +32,9 @@
     <label><input type="checkbox" name="stat" value="Annual 75th Percentile Wage"> Annual 75th Percentile</label><br>
     <label><input type="checkbox" name="stat" value="Annual 90th Percentile Wage"> Annual 90th Percentile</label><br>
   </form>
+
   <div id="result" style="margin-top: 20px;"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
