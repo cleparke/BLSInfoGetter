@@ -3,37 +3,65 @@
 <head>
   <title>Occupation Search</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .result { margin-bottom: 20px; }
-    .result h2 { margin-bottom: 5px; }
-    .result ul { margin: 0; padding-left: 20px; }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px 20px;
+      margin-bottom: 20px;
+    }
+
+    .result {
+      margin-bottom: 20px;
+    }
+
+    .result h2 {
+      margin-bottom: 5px;
+    }
+
+    .result ul {
+      margin: 0;
+      padding-left: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Search Occupations</h1>
 
   <input type="text" id="searchBox" placeholder="Type to search..." />
-  
+
   <h3>Select stats to show:</h3>
   <form id="statForm">
-    <label><input type="checkbox" name="stat" value="Employment" checked> Employment</label><br>
-    <label><input type="checkbox" name="stat" value="Employment percent relative standard error"> Employment % RSE</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly Mean Wage"> Hourly Mean Wage</label><br>
-    <label><input type="checkbox" name="stat" value="Annual Mean Wage"> Annual Mean Wage</label><br>
-    <label><input type="checkbox" name="stat" value="Wage Percent Relative Standard Error"> Wage % RSE</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly 10th Percentile Wage"> Hourly 10th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly 25th Percentile Wage"> Hourly 25th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly Median Wage"> Hourly Median</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly 75th Percentile Wage"> Hourly 75th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Hourly 90th Percentile Wage"> Hourly 90th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Annual 10th Percentile Wage"> Annual 10th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Annual 25th Percentile Wage"> Annual 25th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Annual Median Wage"> Annual Median</label><br>
-    <label><input type="checkbox" name="stat" value="Annual 75th Percentile Wage"> Annual 75th Percentile</label><br>
-    <label><input type="checkbox" name="stat" value="Annual 90th Percentile Wage"> Annual 90th Percentile</label><br>
+    <div class="checkbox-grid">
+      <label><input type="checkbox" name="stat" value="Employment" checked> Employment</label>
+      <label><input type="checkbox" name="stat" value="Employment percent relative standard error"> Employment % RSE</label>
+      <label><input type="checkbox" name="stat" value="Hourly Mean Wage"> Hourly Mean Wage</label>
+
+      <label><input type="checkbox" name="stat" value="Annual Mean Wage"> Annual Mean Wage</label>
+      <label><input type="checkbox" name="stat" value="Wage Percent Relative Standard Error"> Wage % RSE</label>
+      <label><input type="checkbox" name="stat" value="Hourly 10th Percentile Wage"> Hourly 10th Percentile</label>
+
+      <label><input type="checkbox" name="stat" value="Hourly 25th Percentile Wage"> Hourly 25th Percentile</label>
+      <label><input type="checkbox" name="stat" value="Hourly Median Wage"> Hourly Median</label>
+      <label><input type="checkbox" name="stat" value="Hourly 75th Percentile Wage"> Hourly 75th Percentile</label>
+
+      <label><input type="checkbox" name="stat" value="Hourly 90th Percentile Wage"> Hourly 90th Percentile</label>
+      <label><input type="checkbox" name="stat" value="Annual 10th Percentile Wage"> Annual 10th Percentile</label>
+      <label><input type="checkbox" name="stat" value="Annual 25th Percentile Wage"> Annual 25th Percentile</label>
+
+      <label><input type="checkbox" name="stat" value="Annual Median Wage"> Annual Median</label>
+      <label><input type="checkbox" name="stat" value="Annual 75th Percentile Wage"> Annual 75th Percentile</label>
+      <label><input type="checkbox" name="stat" value="Annual 90th Percentile Wage"> Annual 90th Percentile</label>
+    </div>
   </form>
 
-  <div id="result" style="margin-top: 20px;"></div>
+  <div id="result"></div>
 
   <script src="script.js"></script>
 </body>
