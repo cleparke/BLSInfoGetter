@@ -1,5 +1,17 @@
 let allData = [];
-
+// Update Payscale link
+const payscaleBtn = document.getElementById("payscaleBtn");
+if (query.trim()) {
+  const encoded = encodeURIComponent(query.trim());
+  payscaleBtn.onclick = () => {
+    const url = `https://www.payscale.com/rcsearch.aspx?category=&str=${encoded}&CountryName=United+States&SourceId=Job`;
+    window.open(url, "_blank");
+  };
+  payscaleBtn.disabled = false;
+} else {
+  payscaleBtn.onclick = null;
+  payscaleBtn.disabled = true;
+}
 // Load the JSON once when the page loads
 window.addEventListener("DOMContentLoaded", async () => {
   const response = await fetch("2024BLS.json");
